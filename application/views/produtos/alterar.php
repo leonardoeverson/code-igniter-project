@@ -3,9 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
 <div class="container" style="margin-top: 30px">
-    <h5><?php echo $title; ?></h5>
+	<?php echo validation_errors(); ?>
+
+	<?php echo form_open('cadastro/index'); ?>
     <hr />
-    <form>
         <div class="form-group">
             <label for="marca">Marca</label>
             <input type="text" class="form-control" id="marca" aria-describedby="Marca" placeholder="Marca do produto">
