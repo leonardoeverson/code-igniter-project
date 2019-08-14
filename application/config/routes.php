@@ -53,6 +53,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['cadastrar'] = 'produtos/cadastrarProdutos';
 $route['alterar'] = 'produtos/alterarProdutos';
 $route['default_controller'] = 'produtos/listarProdutos';
+$route['cadastro/sucesso'] = 'produtos/sucessoMensagem';
+$route['cadastro/erro'] = 'produtos/erroMensagem';
+
 //Code Igniter
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
