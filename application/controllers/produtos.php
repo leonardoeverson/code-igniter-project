@@ -10,8 +10,14 @@ class Produtos extends CI_Controller{
 	}
 
 	public function listarProdutos(){
+
+		//Título da página
 		$data['title'] = 'Listagem de Produtos';
 
+		//Captura de produtos cadastrados
+		$data['produtos'] = $this->produtos_model->getProdutos();
+
+		//Templates
 		$this->load->view('templates/header', $data);
 		$this->load->view('produtos/listar', $data);
 		$this->load->view('templates/footer', $data);
@@ -39,11 +45,25 @@ class Produtos extends CI_Controller{
 			$this->load->view('produtos/cadastrar', $data);
 			$this->load->view('templates/footer', $data);
 		} else {
-			$this->produtos_model->cadastrarProduto();
-			$this->load->view('templates/header', $data);
-			$this->load->view('templates/sucesso');
-			$this->load->view('produtos/cadastrar');
-			$this->load->view('templates/footer', $data);
+			if($this->produtos_model->cadastrarProduto()){
+
+				$data['mensagem'] = 'Dados inseridos com sucesso';
+
+				$this->load->view('templates/header', $data);
+				$this->load->view('templates/sucesso', $data);
+				$this->load->view('produtos/cadastrar');
+				$this->load->view('templates/footer', $data);
+			}else{
+
+				$data['mensagem'] = 'O produto já existe no banco de dados';
+
+				$this->load->view('templates/header', $data);
+				$this->load->view('templates/erro', $data);
+				$this->load->view('produtos/cadastrar');
+				$this->load->view('templates/footer', $data);
+			}
+
+
 		}
 	}
 
