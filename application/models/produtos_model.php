@@ -12,7 +12,7 @@ class produtos_model extends CI_Model{
 	public function getProdutos(){
 		$query =  $this->db->get('produtos');
 
-		return $query->results();
+		return $query->result();
 	}
 
 	public function getProduto(){
@@ -27,6 +27,14 @@ class produtos_model extends CI_Model{
 	}
 
 	public function alterarProduto(){
+
+	}
+
+	public function excluiProduto(){
+
+	}
+
+	public function excluiProdutos(){
 
 	}
 
