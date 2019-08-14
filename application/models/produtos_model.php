@@ -26,6 +26,13 @@ class produtos_model extends CI_Model{
 		return $query->result();
 	}
 
+	public function getProdutobyId($id){
+
+		$query = $this->db->query("SELECT * FROM produtos where id = $id");
+
+		return $query->result();
+	}
+
 	public function alterarProduto(){
 
 	}

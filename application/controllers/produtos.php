@@ -62,13 +62,52 @@ class Produtos extends CI_Controller{
 				$this->load->view('produtos/cadastrar');
 				$this->load->view('templates/footer', $data);
 			}
-
-
 		}
 	}
 
-	public function alterarProdutos(){
+	public function alterarProdutos($id){
 
+		$data['title'] = 'Alteração de dados de produtos';
+
+		//Carregar Dados do banco de dados
+		$data['produto'] = $this->produtos_model->getProdutobyId($id);
+
+		//Carregar Formulário
+		//tratamento de forms
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+
+		//Regras do Formulário
+		$this->form_validation->set_rules('marca', 'Marca', 'required');
+		$this->form_validation->set_rules('tipo', 'Tipo', 'required');
+		$this->form_validation->set_rules('sabor', 'Sabor', 'required');
+		$this->form_validation->set_rules('litragem', 'Litragem', 'required');
+		$this->form_validation->set_rules('valor', 'Valor Unitário', 'required');
+		$this->form_validation->set_rules('quantidade', 'quantidade', 'required');
+
+		if ($this->form_validation->run() === FALSE){
+			$this->load->view('templates/header', $data);
+			$this->load->view('produtos/alterar', $data);
+			$this->load->view('templates/footer', $data);
+		} else {
+			if($this->produtos_model->alterarProduto()){
+
+				$data['mensagem'] = 'Dados inseridos com sucesso';
+
+				$this->load->view('templates/header', $data);
+				$this->load->view('templates/sucesso', $data);
+				$this->load->view('produtos/alterar');
+				$this->load->view('templates/footer', $data);
+			}else{
+
+				$data['mensagem'] = 'O produto já existe no banco de dados';
+
+				$this->load->view('templates/header', $data);
+				$this->load->view('templates/erro', $data);
+				$this->load->view('produtos/alterar');
+				$this->load->view('templates/footer', $data);
+			}
+		}
 	}
 
 	public function sucessoMensagem(){

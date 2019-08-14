@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <div class="container" style="margin-top: 30px">
 	<?php echo validation_errors(); ?>
 
-	<?php echo form_open('produtos/cadastrarProdutos', 'meth', '', ); ?>
+	<?php echo form_open('produtos/cadastrarProdutos' ); ?>
     <hr />
         <div class="form-group">
             <label for="marca">Marca</label>

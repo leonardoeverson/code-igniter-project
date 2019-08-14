@@ -5,40 +5,59 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <div class="container" style="margin-top: 30px">
 	<?php echo validation_errors(); ?>
 
-	<?php echo form_open('cadastro/index'); ?>
-    <hr />
-        <div class="form-group">
-            <label for="marca">Marca</label>
-            <input type="text" class="form-control" id="marca" aria-describedby="Marca" placeholder="Marca do produto">
-        </div>
-        <div class="form-group">
-            <label for="tipo">Tipo</label>
-            <select id="tipo" class="form-control" id="exampleFormControlSelect1">
-                <option>Pet</option>
-                <option>Garrafa</option>
-                <option>Lata</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="tipo">Sabor</label>
-            <input type="text" class="form-control" id="tipo" placeholder="Sabor">
-        </div>
-        <div class="form-group">
-            <label for="tipo">Litragem</label>
-            <select id="tipo" class="form-control" id="exampleFormControlSelect1">
-                <option>250 mL</option>
-                <option>600 mL</option>
-                <option>1L</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="tipo">Valor Unitário</label>
-            <input type="text" class="form-control" id="valor" placeholder="Valor Unitário">
-        </div>
-        <div class="form-group">
-            <label for="tipo">Quantidade</label>
-            <input type="text" class="form-control" id="quantidade" placeholder="Valor Unitário">
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
+	<?php echo form_open('produtos/alterarProdutos'); ?>
+	<hr/>
+	<div class="form-group">
+		<label for="marca">Marca</label>
+		<input type="text" class="form-control" id="marca" name="marca" aria-describedby="Marca"
+			   placeholder="Marca do produto" maxlength="30" value="<?php echo html_escape($produto[0]->marca); ?>"
+			   required>
+	</div>
+	<div class="form-group">
+		<label for="tipo">Tipo</label>
+
+		<?php
+
+		$options = array(
+			'Pet' => 'Pet',
+			'Garrafa' => 'Garrafa',
+			'Lata' => 'Lata'
+		);
+
+		echo form_dropdown('tipo', $options, $produto[0]->tipo, 'class="form-control" id="tipo" required');
+		?>
+
+	</div>
+	<div class="form-group">
+		<label for="sabor">Sabor</label>
+		<input type="text" class="form-control" id="sabor" name="sabor" placeholder="Sabor" required
+			   value="<?php echo html_escape($produto[0]->sabor); ?>">
+	</div>
+	<div class="form-group">
+		<label for="litragem">Litragem</label>
+
+		<?php
+
+		$options = array(
+			'250 mL' => '250 mL',
+			'600 mL' => '600 mL',
+			'1L' => '1L'
+		);
+
+		echo form_dropdown('tipo', $options, $produto[0]->litragem, 'class="form-control" id="litragem" required');
+
+		?>
+	</div>
+	<div class="form-group">
+		<label for="valor">Valor Unitário</label>
+		<input type="text" class="form-control" id="valor" name="valor" placeholder="Valor Unitário" required
+			   value="<?php echo html_escape($produto[0]->valor_unitario); ?>">
+	</div>
+	<div class="form-group">
+		<label for="quantidade">Quantidade</label>
+		<input type="text" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade" required
+			   value="<?php echo html_escape($produto[0]->quantidade); ?>">
+	</div>
+	<button type="submit" class="btn btn-primary">Enviar</button>
+	</form>
 </div>

@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['cadastrar'] = 'produtos/cadastrarProdutos';
 $route['alterar'] = 'produtos/alterarProdutos';
-$route['alterar/(:any)'] = 'produtos/alterarProdutos';
+$route['alterar/(:any)'] = 'produtos/alterarProdutos/$1';
 $route['default_controller'] = 'produtos/listarProdutos';
 $route['cadastro/sucesso'] = 'produtos/sucessoMensagem';
 $route['cadastro/erro'] = 'produtos/erroMensagem';
