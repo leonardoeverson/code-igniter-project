@@ -30,29 +30,21 @@ class produtos_model extends CI_Model{
 		return $query->result();
 	}
 
-	public function getProdutobyData($array){
+	public function getProdutobyData($query){
 
-		$this->db->select('*');
-		$this->db->from('produtos');
-		$this->db->where($array);
-		$query = $this->db->get();
-
-		return $query;
+		$result = $this->db->query($query);
+		return $result;
 	}
 
 	public function alterarProduto(){
 
-		$dados = array(
-			'id != '=>$this->input->post('id'),
-			'marca' => $this->input->post('marca'),
-			'tipo' => $this->input->post('tipo'),
-			'sabor' => $this->input->post('sabor'),
-			'litragem' => $this->input->post('litragem'),
-			'valor_unitario' => floatval(str_replace(',', '.', $this->input->post('valor'))),
-			'quantidade' => intval($this->input->post('quantidade'))
-		);
+		$dados = 'SELECT * FROM produtos where id != ' .$this->input->post('id');
+		$dados .= ' and marca = '.$this->db->escape($this->input->post('marca'));
+		$dados .= ' and tipo = '. $this->db->escape($this->input->post('tipo'));
+		$dados .= ' and sabor = '.$this->db->escape($this->input->post('sabor'));
+		$dados .= ' and litragem = '.$this->db->escape($this->input->post('litragem'));
 
-		if ($this->getProdutobyData($dados)->num_rows == 0) {
+		if ($this->getProdutobyData($dados)->num_rows() == 0) {
 
 			$this->db->set('marca', $this->input->post('marca'));
 			$this->db->set('tipo', $this->input->post('tipo'));

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <div class="container" style="margin-top: 30px">
 	<?php echo validation_errors(); ?>
 	<h4>Dados do Produto</h4>
@@ -68,4 +68,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</div>
 	<button type="submit" class="btn btn-primary">Enviar</button>
 	</form>
+
+	<script>
+        $('#valor').mask('#.##0,00', {reverse: true});
+        $('#quantidade').mask("#")
+	</script>
 </div>

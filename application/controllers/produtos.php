@@ -81,36 +81,32 @@ class Produtos extends CI_Controller{
 		$this->form_validation->set_rules('valor', 'Valor Unitário', 'required');
 		$this->form_validation->set_rules('quantidade', 'quantidade', 'required');
 
+		//Header
+		$this->load->view('templates/header', $data);
+
 		if ($this->form_validation->run() === FALSE){
 
 			//Carregar Dados do banco de dados
 			$data['produto'] = $this->produtos_model->getProdutobyId($id);
 
-			$this->load->view('templates/header', $data);
 			$this->load->view('produtos/alterar', $data);
-			$this->load->view('templates/footer', $data);
+
 		} else {
+
 			if($this->produtos_model->alterarProduto()){
-
 				$data['mensagem'] = 'Dados inseridos com sucesso';
-
-				//Carregar Dados do banco de dados
-				$data['produto'] = $this->produtos_model->getProdutobyId($id);
-
-				$this->load->view('templates/header', $data);
 				$this->load->view('templates/sucesso', $data);
-				$this->load->view('produtos/alterar');
-				$this->load->view('templates/footer', $data);
 			}else{
-
 				$data['mensagem'] = 'O produto já existe no banco de dados';
-
-				$this->load->view('templates/header', $data);
 				$this->load->view('templates/erro', $data);
-				$this->load->view('produtos/alterar');
-				$this->load->view('templates/footer', $data);
 			}
+
+			$data['produto'] = $this->produtos_model->getProdutobyId($id);
+			$this->load->view('produtos/alterar',$data);
 		}
+
+		//Footer
+		$this->load->view('templates/footer', $data);
 	}
 
 	public function excluirProduto($id){
