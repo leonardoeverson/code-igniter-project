@@ -13,7 +13,8 @@ class produtos_model extends CI_Model{
 		return $query->result();
 	}
 
-	public function getProduto(){
+	public function getProduto()
+	{
 
 		$tipo = $this->input->post('tipo');
 		$marca = $this->input->post('marca');
@@ -38,11 +39,11 @@ class produtos_model extends CI_Model{
 
 	public function alterarProduto(){
 
-		$dados = 'SELECT * FROM produtos where id != ' .$this->input->post('id');
-		$dados .= ' and marca = '.$this->db->escape($this->input->post('marca'));
-		$dados .= ' and tipo = '. $this->db->escape($this->input->post('tipo'));
-		$dados .= ' and sabor = '.$this->db->escape($this->input->post('sabor'));
-		$dados .= ' and litragem = '.$this->db->escape($this->input->post('litragem'));
+		$dados = 'SELECT * FROM produtos where id != ' . $this->input->post('id');
+		$dados .= ' and marca = ' . $this->db->escape($this->input->post('marca'));
+		$dados .= ' and tipo = ' . $this->db->escape($this->input->post('tipo'));
+		$dados .= ' and sabor = ' . $this->db->escape($this->input->post('sabor'));
+		$dados .= ' and litragem = ' . $this->db->escape($this->input->post('litragem'));
 
 		if ($this->getProdutobyData($dados)->num_rows() == 0) {
 
@@ -57,23 +58,28 @@ class produtos_model extends CI_Model{
 			$this->db->update('produtos');
 
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
 	public function excluiProdutosDB($id){
 
-		if(!strstr(',', $id)){
-			$query = $this->db->delete('produtos', array('id' => $id));
+		if (!strstr(',', $id)) {
+			$result = $this->db->delete('produtos', array('id' => $id));
 
-			if($query == 1){
+			if ($result == 1) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
 
-		}else{
+		} else {
+
+			$ids = explode(',', $id);
+
+			for ($i = 0; $i < count($i); $i++) {
+			}
 
 		}
 	}
@@ -99,5 +105,11 @@ class produtos_model extends CI_Model{
 			return false;
 		}
 
+	}
+
+	public function getMarcas(){
+		$query = $this->db->get('marcas');
+
+		return $query->result();
 	}
 }

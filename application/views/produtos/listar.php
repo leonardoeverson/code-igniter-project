@@ -2,9 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.css"/>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.js"></script>
+
 <h5><?php echo $title; ?></h5>
 <hr/>
 <table class="table" id="table">
@@ -23,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</thead>
 	<tbody>
 	<?php foreach ($produtos as $produto) {
-		echo '<tr><td><input type="checkbox" class="checkbox form-control"></td>';
+		echo '<tr><td><input type="checkbox" class="checkbox form-control" id=' . $produto->id . '></td>';
 		echo '<td>' . $produto->marca . '</td>';
 		echo '<td>' . $produto->tipo . '</td>';
 		echo '<td>' . $produto->sabor . '</td>';
@@ -39,6 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script>
     let tabela = $('#table').DataTable({
+		dom:'Bfrtip',
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -68,15 +70,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     "1": "Selecionado 1 linha"
                 }
             }
-        }
-        ,
-        buttons: [
-            {
-                text: 'Excluir Itens',
-                action: function (e, dt, node, config) {
-                    excluiItens(1);
-                }
+        },
+        buttons: [{
+            text: 'Excluir Itens',
+			className: 'btn btn-danger',
+            attr: {
+                id: 'excluir_itens'
+            },
+            action: function (e, dt, node, config) {
+                excluiItens(1);
             }
+        }
         ]
     });
 
@@ -96,12 +100,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             let selected = [];
 
             for (let i = 0; i < $('.checkbox').length; i++) {
-                if ($('.checkbox').checked) {
-                    selected.push($('.checkbox').attr('id'));
+                if ($('.checkbox')[i].checked) {
+                    selected.push($('.checkbox')[i].id);
                 }
             }
 
-            send_action(dados);
+            if(selected.length > 0){
+                send_action(selected.join(','));
+			}else{
+                alert('Você deve selecionar pelo menos um item.')
+			}
+
+
         } else {
             send_action(id);
         }
@@ -121,3 +131,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
 
 </script>
+
+<style>
+	#excluir_itens{
+		margin-bottom: -40px;
+	}
+</style>

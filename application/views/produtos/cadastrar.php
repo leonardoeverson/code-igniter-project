@@ -9,8 +9,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<hr/>
 	<div class="form-group">
 		<label for="marca">Marca</label>
-		<input type="text" class="form-control" id="marca" name="marca" aria-describedby="Marca"
-			   placeholder="Marca do produto" maxlength="30" required>
+		<select class="form-control" id="marca" name="marca" aria-describedby="Marca"
+				placeholder="Marca do produto" required>
+
+			<?php
+
+			foreach ($marcas as $marca) {
+				echo '<option value='.$marca->nome.'>' . $marca->nome . '</option>';
+			}
+
+			?>
+		</select>
 	</div>
 	<div class="form-group">
 		<label for="tipo">Tipo</label>

@@ -31,6 +31,8 @@ class Produtos extends CI_Controller{
 		//Regras do Formulário
 		$this->setFormRules();
 
+		$data['marcas'] = $this->produtos_model->getMarcas();
+
 		//Header
 		$this->load->view('templates/header', $data);
 
@@ -100,7 +102,14 @@ class Produtos extends CI_Controller{
 	}
 
 	public function excluirProdutos(){
+
 		$id = $this->input->post('produto');
-		$this->produtos_model->excluiProdutosDB($id);
+
+		if($this->produtos_model->excluiProdutosDB($id)){
+			$this->output->set_output(array('mensagem', 'Produto(s) excluído(s) com sucesso.'));
+		}else{
+			$this->output->set_output(array('mensagem', 'Houve um erro ao executar a ação.'));
+		}
+
 	}
 }
