@@ -19,9 +19,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 	<div class="form-group">
 		<label for="marca">Marca</label>
-		<input type="text" class="form-control" id="marca" name="marca" aria-describedby="Marca"
-			   placeholder="Marca do produto" maxlength="30" value="<?php echo html_escape($produto[0]->marca); ?>"
-			   required>
+		<?php
+
+		$options = array();
+
+		foreach ($marcas as $marca) {
+			$options[$marca->nome] = $marca->nome;
+		}
+
+		echo form_dropdown('marca', $options, $produto[0]->marca, 'class="form-control" id="marca" required');
+		?>
 	</div>
 	<div class="form-group">
 		<label for="tipo">Tipo</label>

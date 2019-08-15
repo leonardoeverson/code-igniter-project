@@ -39,6 +39,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 <script>
+
+	//limpar checkbox
+	for(let i = 0; i < $('.checkbox').length; i++ ){
+        $('.checkbox')[i].checked = false;
+	}
+
     let tabela = $('#table').DataTable({
 		dom:'Bfrtip',
         "language": {

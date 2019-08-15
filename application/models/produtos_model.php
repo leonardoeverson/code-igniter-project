@@ -65,7 +65,8 @@ class produtos_model extends CI_Model{
 
 	public function excluiProdutosDB($id){
 
-		if (!strstr(',', $id)) {
+		$pos = strpos($id, ',');
+		if ($pos === false) {
 			$result = $this->db->delete('produtos', array('id' => $id));
 
 			if ($result == 1) {
@@ -78,9 +79,11 @@ class produtos_model extends CI_Model{
 
 			$ids = explode(',', $id);
 
-			for ($i = 0; $i < count($i); $i++) {
+			for ($i = 0; $i < count($ids); $i++) {
+				$this->db->delete('produtos', array('id' => $ids[$i]));
 			}
 
+			return true;
 		}
 	}
 

@@ -5,6 +5,7 @@ class Produtos extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->library('session');
 		$this->load->model('produtos_model');
 		$this->load->helper('url_helper');
 	}
@@ -60,6 +61,8 @@ class Produtos extends CI_Controller{
 		//Regras do Formulário
 		$this->setFormRules();
 
+		$data['marcas'] = $this->produtos_model->getMarcas();
+
 		//Header
 		$this->load->view('templates/header', $data);
 
@@ -106,9 +109,9 @@ class Produtos extends CI_Controller{
 		$id = $this->input->post('produto');
 
 		if($this->produtos_model->excluiProdutosDB($id)){
-			$this->output->set_output(array('mensagem', 'Produto(s) excluído(s) com sucesso.'));
+			$this->output->set_output(json_encode(array('mensagem', 'Produto(s) excluído(s) com sucesso.')));
 		}else{
-			$this->output->set_output(array('mensagem', 'Houve um erro ao executar a ação.'));
+			$this->output->set_output(json_encode(array('mensagem', 'Houve um erro ao executar a ação.')));
 		}
 
 	}

@@ -9,17 +9,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<hr/>
 	<div class="form-group">
 		<label for="marca">Marca</label>
-		<select class="form-control" id="marca" name="marca" aria-describedby="Marca"
-				placeholder="Marca do produto" required>
+		<?php
 
-			<?php
+			$options = array();
 
 			foreach ($marcas as $marca) {
-				echo '<option value='.$marca->nome.'>' . $marca->nome . '</option>';
+				$options[$marca->nome] = $marca->nome;
 			}
 
-			?>
-		</select>
+			echo form_dropdown('marca', $options, '', 'class="form-control" id="marca" required');
+		?>
 	</div>
 	<div class="form-group">
 		<label for="tipo">Tipo</label>
