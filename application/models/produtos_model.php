@@ -3,8 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class produtos_model extends CI_Model{
 
-	private $dados;
-
 	public function __construct(){
 		$this->load->database();
 	}
@@ -33,16 +31,16 @@ class produtos_model extends CI_Model{
 		return $query->result();
 	}
 
-	public function alterarProduto(){
+	public function alterarProduto($id){
+		$query = $this->db->query("UPDATE produtos SET where id = $id");
 
+		return $query->result();
 	}
 
-	public function excluiProduto(){
+	public function excluiProduto($id){
+		$query = $this->db->delete('produtos', array('id' => $id));
 
-	}
-
-	public function excluiProdutos(){
-
+		return $query->result();
 	}
 
 	public function cadastrarProduto(){

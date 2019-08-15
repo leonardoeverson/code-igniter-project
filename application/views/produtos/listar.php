@@ -25,85 +25,98 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<?php foreach ($produtos as $produto) {
 		echo '<tr><td><input type="checkbox" class="checkbox form-control"></td>';
 		echo '<td>' . $produto->marca . '</td>';
-		echo '<td>' . $produto->tipo. '</td>';
+		echo '<td>' . $produto->tipo . '</td>';
 		echo '<td>' . $produto->sabor . '</td>';
 		echo '<td>' . $produto->litragem . '</td>';
 		echo '<td>' . $produto->valor_unitario . '</td>';
 		echo '<td>' . $produto->quantidade . '</td>';
-		echo '<td><button type="button" class="btn btn-primary alterar" id='.$produto->id.'>Alterar</button></td>';
-		echo '<td><button type="button" class="btn btn-danger excluir"  id='.$produto->id.'>Excluir</button></td></tr>';
+		echo '<td><button type="button" class="btn btn-primary alterar" id=' . $produto->id . '>Alterar</button></td>';
+		echo '<td><button type="button" class="btn btn-danger excluir"  id=' . $produto->id . '>Excluir</button></td></tr>';
 	}; ?>
 	</tbody>
 </table>
 
 
 <script>
-        let tabela = $('#table').DataTable( {
-            "language":{
-                "sEmptyTable": "Nenhum registro encontrado",
-                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sInfoThousands": ".",
-                "sLengthMenu": "_MENU_ Resultados por página",
-                "sLoadingRecords": "Carregando...",
-                "sProcessing": "Processando...",
-                "sZeroRecords": "Nenhum registro encontrado",
-                "sSearch": "Pesquisar",
-                "oPaginate": {
+    let tabela = $('#table').DataTable({
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ Resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
                 "sNext": "Próximo",
-                    "sPrevious": "Anterior",
-                    "sFirst": "Primeiro",
-                    "sLast": "Último"
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
             },
-                "oAria": {
+            "oAria": {
                 "sSortAscending": ": Ordenar colunas de forma ascendente",
-                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                "sSortDescending": ": Ordenar colunas de forma descendente"
             },
-                "select": {
+            "select": {
                 "rows": {
                     "_": "Selecionado %d linhas",
-                        "0": "Nenhuma linha selecionada",
-                        "1": "Selecionado 1 linha"
+                    "0": "Nenhuma linha selecionada",
+                    "1": "Selecionado 1 linha"
                 }
             }
+        }
+        ,
+        buttons: [
+            {
+                text: 'Excluir Itens',
+                action: function (e, dt, node, config) {
+                    excluiItens(1);
+                }
             }
-            ,
-            buttons: [
-                {
-                    text: 'Excluir Itens',
-                    action: function ( e, dt, node, config ) {
-						excluiItens(1);
-                    }
+        ]
+    });
+
+    $('.excluir').on('click', () => {
+        excluiItens(2, e.target.id)
+    });
+
+    $('.alterar').on('click', (e) => {
+        location.href = '/index.php/alterar/' + e.target.id
+    });
+
+
+    function excluiItens(tipo, id) {
+
+        if (tipo == 1) {
+
+            let selected = [];
+
+            for (let i = 0; i < $('.checkbox').length; i++) {
+                if ($('.checkbox').checked) {
+                    selected.push($('.checkbox').attr('id'));
                 }
-            ]
-        });
+            }
 
-        $('.excluir').on('click',()=>{
-            excluiItens(2)
-		});
+            send_action(dados);
+        } else {
+			send_action(id);
+        }
+    }
 
-        $('.alterar').on('click',(e)=>{
-            location.href  = '/index.php/alterar/'+ e.target.id
-        });
-
-
-        function excluiItens(tipo){
-
-            if(tipo == 1){
-
-                let selected = [];
-
-                for(let i = 0; i < $('.checkbox').length; i++ ){
-                    if($('.checkbox').checked){
-                        selected.push($('.checkbox').attr('id'));
-                    }
-                }
-
-			}else{
-
-			}
-		}
+    function send_action(dados) {
+        $.ajax({
+            method: "POST",
+            url: "index.php/cadastro/excluir",
+            dataType: 'html',
+            data: {produto: dados}
+        })
+            .done(function (msg) {
+                alert(msg);
+            });
+    }
 
 </script>

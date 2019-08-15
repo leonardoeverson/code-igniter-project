@@ -13,11 +13,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
         <div class="form-group">
             <label for="tipo">Tipo</label>
-            <select id="tipo" name="tipo" class="form-control" required>
-                <option value="Pet">Pet</option>
-                <option value="Garrafa">Garrafa</option>
-                <option value="Lata">Lata</option>
-            </select>
+			<?php
+
+			$options = array(
+				'Pet' => 'Pet',
+				'Garrafa' => 'Garrafa',
+				'Lata' => 'Lata'
+			);
+
+			echo form_dropdown('tipo', $options, '', 'class="form-control" id="tipo" required');
+			?>
         </div>
         <div class="form-group">
             <label for="sabor">Sabor</label>
@@ -25,11 +30,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
         <div class="form-group">
             <label for="litragem">Litragem</label>
-            <select id="litragem" name="litragem" class="form-control" required>
-                <option value="250 mL">250 mL</option>
-                <option value="600 mL">600 mL</option>
-                <option value="1L">1L</option>
-            </select>
+			<?php
+
+			$options = array(
+				'250 mL' => '250 mL',
+				'600 mL' => '600 mL',
+				'1L' => '1L'
+			);
+
+			echo form_dropdown('tipo', $options, '', 'class="form-control" id="litragem" required');
+
+			?>
         </div>
         <div class="form-group">
             <label for="valor">Valor Unitário</label>
