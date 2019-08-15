@@ -39,7 +39,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			'1L' => '1L'
 		);
 
-		echo form_dropdown('tipo', $options, '', 'class="form-control" id="litragem" required');
+		echo form_dropdown('litragem', $options, '', 'class="form-control" id="litragem" required');
 
 		?>
 	</div>

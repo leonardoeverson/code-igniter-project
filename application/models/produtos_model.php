@@ -62,14 +62,19 @@ class produtos_model extends CI_Model{
 		}
 	}
 
-	public function excluiProduto($id){
+	public function excluiProdutosDB($id){
 
-		$query = $this->db->delete('produtos', array('id' => $id));
+		if(!strstr(',', $id)){
+			$query = $this->db->delete('produtos', array('id' => $id));
 
-		if(count($query->result()) > 0){
-			return true;
+			if($query == 1){
+				return true;
+			}else{
+				return false;
+			}
+
 		}else{
-			return false;
+
 		}
 	}
 

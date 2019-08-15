@@ -80,7 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         ]
     });
 
-    $('.excluir').on('click', () => {
+    $('.excluir').on('click', (e) => {
         excluiItens(2, e.target.id)
     });
 
@@ -110,12 +110,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     function send_action(dados) {
         $.ajax({
             method: "POST",
-            url: "index.php/cadastro/excluir",
+            url: "index.php/excluir/",
             dataType: 'html',
             data: {produto: dados}
         })
             .done(function (msg) {
                 alert(msg);
+                location.reload();
             });
     }
 
