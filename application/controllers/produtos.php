@@ -67,12 +67,8 @@ class Produtos extends CI_Controller{
 
 	public function alterarProdutos($id){
 
-		$data['title'] = 'Alteração de dados de produtos';
+		$data['title'] = 'Alteração de dados';
 
-		//Carregar Dados do banco de dados
-		$data['produto'] = $this->produtos_model->getProdutobyId($id);
-
-		//Carregar Formulário
 		//tratamento de forms
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -86,6 +82,10 @@ class Produtos extends CI_Controller{
 		$this->form_validation->set_rules('quantidade', 'quantidade', 'required');
 
 		if ($this->form_validation->run() === FALSE){
+
+			//Carregar Dados do banco de dados
+			$data['produto'] = $this->produtos_model->getProdutobyId($id);
+
 			$this->load->view('templates/header', $data);
 			$this->load->view('produtos/alterar', $data);
 			$this->load->view('templates/footer', $data);
@@ -93,6 +93,9 @@ class Produtos extends CI_Controller{
 			if($this->produtos_model->alterarProduto()){
 
 				$data['mensagem'] = 'Dados inseridos com sucesso';
+
+				//Carregar Dados do banco de dados
+				$data['produto'] = $this->produtos_model->getProdutobyId($id);
 
 				$this->load->view('templates/header', $data);
 				$this->load->view('templates/sucesso', $data);
@@ -109,6 +112,11 @@ class Produtos extends CI_Controller{
 			}
 		}
 	}
+
+	public function excluirProduto($id){
+		$this->produtos_model->excluirProduto($id);
+	}
+
 
 	public function sucessoMensagem(){
 		//Título

@@ -4,9 +4,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <div class="container" style="margin-top: 30px">
 	<?php echo validation_errors(); ?>
-
-	<?php echo form_open('produtos/alterarProdutos'); ?>
+	<h4>Dados do Produto</h4>
 	<hr/>
+	<?php echo form_open('produtos/alterarProdutos/'.$produto[0]->id); ?>
+	<?php
+	$data = array(
+		'id' => $produto[0]->id
+	);
+
+	echo form_hidden($data);
+	?>
+
 	<div class="form-group">
 		<label for="marca">Marca</label>
 		<input type="text" class="form-control" id="marca" name="marca" aria-describedby="Marca"
@@ -44,7 +52,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			'1L' => '1L'
 		);
 
-		echo form_dropdown('tipo', $options, $produto[0]->litragem, 'class="form-control" id="litragem" required');
+		echo form_dropdown('litragem', $options, $produto[0]->litragem, 'class="form-control" id="litragem" required');
 
 		?>
 	</div>

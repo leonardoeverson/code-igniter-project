@@ -8,14 +8,14 @@ class produtos_model extends CI_Model{
 	}
 
 	public function getProdutos(){
-		$query =  $this->db->get('produtos');
+		$query = $this->db->get('produtos');
 
 		return $query->result();
 	}
 
 	public function getProduto(){
 
-		$tipo = $this->input->post('tipo') ;
+		$tipo = $this->input->post('tipo');
 		$marca = $this->input->post('marca');
 		$sabor = $this->input->post('sabor');
 		$litragem = $this->input->post('litragem');
@@ -25,42 +25,80 @@ class produtos_model extends CI_Model{
 	}
 
 	public function getProdutobyId($id){
-
 		$query = $this->db->query("SELECT * FROM produtos where id = $id");
 
 		return $query->result();
 	}
 
-	public function alterarProduto($id){
-		$query = $this->db->query("UPDATE produtos SET where id = $id");
+	public function getProdutobyData($array){
 
-		return $query->result();
+		$this->db->select('*');
+		$this->db->from('produtos');
+		$this->db->where($array);
+		$query = $this->db->get();
+
+		return $query;
+	}
+
+	public function alterarProduto(){
+
+		$dados = array(
+			'id != '=>$this->input->post('id'),
+			'marca' => $this->input->post('marca'),
+			'tipo' => $this->input->post('tipo'),
+			'sabor' => $this->input->post('sabor'),
+			'litragem' => $this->input->post('litragem'),
+			'valor_unitario' => floatval(str_replace(',', '.', $this->input->post('valor'))),
+			'quantidade' => intval($this->input->post('quantidade'))
+		);
+
+		if ($this->getProdutobyData($dados)->num_rows == 0) {
+
+			$this->db->set('marca', $this->input->post('marca'));
+			$this->db->set('tipo', $this->input->post('tipo'));
+			$this->db->set('sabor', $this->input->post('sabor'));
+			$this->db->set('litragem', $this->input->post('litragem'));
+			$this->db->set('valor_unitario', floatval(str_replace(',', '.', $this->input->post('valor'))));
+			$this->db->set('quantidade', intval($this->input->post('quantidade')));
+
+			$this->db->where('id', $this->input->post('id'));
+			$this->db->update('produtos');
+
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function excluiProduto($id){
+
 		$query = $this->db->delete('produtos', array('id' => $id));
 
-		return $query->result();
+		if(count($query->result()) > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public function cadastrarProduto(){
 
 		$this->load->helper('url');
 
-		if(count($this->getProduto()) == 0){
+		if (count($this->getProduto()) == 0) {
 			$data = array(
-				'marca'=> $this->input->post('marca'),
-				'tipo'=> $this->input->post('tipo'),
-				'sabor'=>$this->input->post('sabor'),
-				'litragem'=> $this->input->post('litragem'),
-				'valor_unitario'=> floatval(str_replace(',','.', $this->input->post('valor'))),
-				'quantidade'=> intval($this->input->post('quantidade'))
+				'marca' => $this->input->post('marca'),
+				'tipo' => $this->input->post('tipo'),
+				'sabor' => $this->input->post('sabor'),
+				'litragem' => $this->input->post('litragem'),
+				'valor_unitario' => floatval(str_replace(',', '.', $this->input->post('valor'))),
+				'quantidade' => intval($this->input->post('quantidade'))
 			);
 
 			$this->db->insert('produtos', $data);
 
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 
