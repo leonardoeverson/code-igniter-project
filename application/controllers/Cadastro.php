@@ -21,15 +21,23 @@ class Cadastro extends CI_Controller{
 		if ($this->form_validation->run() === FALSE){
 			$this->load->view('usuario/cadastro');
 		} else {
-			if($this->CadastroModel->cadastroUsuario()){
-				$data['mensagem'] = 'Cadastro realizado com sucesso';
-				$this->load->view('templates/sucesso', $data);
-				$this->load->view('usuario/cadastro');
+
+			if($this->CadastroModel->verifyEmail($this->input->post('email'))){
+				if($this->CadastroModel->cadastroUsuario()){
+					$data['mensagem'] = 'Cadastro realizado com sucesso';
+					$this->load->view('templates/sucesso', $data);
+					$this->load->view('usuario/cadastro');
+				}else{
+					$data['mensagem'] = 'Erro ao realizar o cadastro';
+					$this->load->view('templates/erro', $data);
+					$this->load->view('usuario/cadastro');
+				}
 			}else{
-				$data['mensagem'] = 'Erro ao realizar o cadastro';
+				$data['mensagem'] = 'Já existe um cadastro para este E-mail';
 				$this->load->view('templates/erro', $data);
 				$this->load->view('usuario/cadastro');
 			}
+
 		}
 
 		$this->load->view('templates/footer');
@@ -39,11 +47,12 @@ class Cadastro extends CI_Controller{
 		//tratamento de forms
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->form_validation->set_message('required', 'O campo %s é obrigatório');
 
 		//Regras do Formulário
-		$this->form_validation->set_rules('email', 'O campo E-mail é obrigatório', 'required');
-		$this->form_validation->set_rules('senha1', 'O campo Senha é obrigatório', 'required');
-		$this->form_validation->set_rules('senha2', 'O campo de confirmação da senha é obrigatório', 'required');
+		$this->form_validation->set_rules('email', 'E-mail', 'required');
+		$this->form_validation->set_rules('senha1', 'Senha', 'required');
+		$this->form_validation->set_rules('senha2', 'Confirmação da senha', 'required|matches[senha1]');
 	}
 
 	protected function loadHeader($data){
