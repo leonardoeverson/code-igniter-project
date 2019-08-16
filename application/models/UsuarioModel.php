@@ -11,7 +11,10 @@ class UsuarioModel extends CI_Model{
 
 		$resultado = $this->db->get_where('usuarios',array('email'=>$this->input->post('email')))->result();
 
-		if($this->verificaSenha($this->input->post('senha'), $resultado->senha)){
+		if($this->verificaSenha($this->input->post('senha'), $resultado[0]->senha)){
+			$this->load->library('session');
+			$this->session->id_usuario = $resultado[0]->id;
+			$this->session->logged = 'true';
 			return true;
 		}else{
 			return false;

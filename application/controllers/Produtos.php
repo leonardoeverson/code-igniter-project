@@ -8,6 +8,10 @@ class Produtos extends CI_Controller{
 		$this->load->library('session');
 		$this->load->model('produtos_model');
 		$this->load->helper('url_helper');
+
+		if(isset($this->session->logged)){
+			redirect('index.php/login');
+		}
 	}
 
 	public function listarProdutos(){

@@ -5,6 +5,7 @@ class Usuario extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
+
 		$this->load->library('session');
 		$this->load->model('UsuarioModel');
 		$this->load->helper('url_helper');
@@ -23,21 +24,12 @@ class Usuario extends CI_Controller{
 		} else {
 
 			if($this->UsuarioModel->loginUsuario()){
-				if($this->CadastroModel->cadastroUsuario()){
-					$data['mensagem'] = 'Cadastro realizado com sucesso';
-					//$this->load->view('templates/sucesso', $data);
-					//$this->load->view('usuario/cadastro');
-				}else{
-					$data['mensagem'] = 'Erro ao realizar o cadastro';
-					$this->load->view('templates/erro', $data);
-					$this->load->view('login');
-				}
+					redirect('/');
 			}else{
-				$data['mensagem'] = 'Já existe um cadastro para este E-mail';
+				$data['mensagem'] = 'Senha e/ou email incorretos';
 				$this->load->view('templates/erro', $data);
-				$this->load->view('usuario/cadastro');
+				$this->load->view('login', $data);
 			}
-
 		}
 
 		$this->load->view('templates/footer');
@@ -57,5 +49,10 @@ class Usuario extends CI_Controller{
 
 	protected function loadHeader($data){
 		$this->load->view('templates/header', $data);
+	}
+
+	public function logoutUsuario(){
+		$this->session->sess_destroy();
+		redirect('index.php/login');
 	}
 }
