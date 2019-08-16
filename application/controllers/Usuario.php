@@ -27,7 +27,6 @@ class Usuario extends CI_Controller{
 					redirect('/');
 			}else{
 				$data['mensagem'] = 'Senha e/ou email incorretos';
-				$this->load->view('templates/erro', $data);
 				$this->load->view('login', $data);
 			}
 		}
@@ -53,6 +52,6 @@ class Usuario extends CI_Controller{
 
 	public function logoutUsuario(){
 		$this->session->sess_destroy();
-		redirect('index.php/login');
+		redirect('/login');
 	}
 }

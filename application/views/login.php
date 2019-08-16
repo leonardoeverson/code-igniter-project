@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<?php echo $erros = form_validation(); ?>
+<?php echo $erros = validation_errors(); ?>
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-5">
@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 
 
-					if ($mensagem != null) {
+					if (isset($mensagem)) {
 						?>
 						<div class="form-group row">
 							<div class="alert alert-danger" role="alert" style="width: 100%">

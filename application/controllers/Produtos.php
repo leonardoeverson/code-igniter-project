@@ -9,8 +9,8 @@ class Produtos extends CI_Controller{
 		$this->load->model('produtos_model');
 		$this->load->helper('url_helper');
 
-		if(isset($this->session->logged)){
-			redirect('index.php/login');
+		if(!isset($this->session->logged)){
+			redirect('/login');
 		}
 	}
 
@@ -31,15 +31,12 @@ class Produtos extends CI_Controller{
 
 	public function cadastrarProdutos(){
 
-		//Título
 		$data['title'] = 'Cadastro de Produtos';
 
-		//Regras do Formulário
 		$this->setFormRules();
 
 		$data['marcas'] = $this->produtos_model->getMarcas();
 
-		//Header
 		$this->loadHeader($data);
 
 		if ($this->form_validation->run() === FALSE){

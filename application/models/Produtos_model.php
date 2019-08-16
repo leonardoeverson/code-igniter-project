@@ -4,13 +4,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class produtos_model extends CI_Model{
 
 	public function __construct(){
+
 		$this->load->helper('url');
 		$this->load->database();
+		$this->load->library('session');
+
 	}
 
 	public function getProdutos(){
-		$query = $this->db->get('produtos');
+
+		$query = $this->db->get_where('produtos',array('ativo'=> 1));
 		return $query->result();
+
 	}
 
 	public function getProduto(){
@@ -21,6 +26,7 @@ class produtos_model extends CI_Model{
 		$litragem = $this->input->post('litragem');
 		$query = $this->db->query("SELECT * from produtos where marca = '$marca' and tipo = '$tipo' and sabor = '$sabor' and litragem = '$litragem'");
 		return $query->result();
+
 	}
 
 	public function getProdutobyId($id){
@@ -86,13 +92,17 @@ class produtos_model extends CI_Model{
 	public function cadastrarProduto(){
 
 		if (count($this->getProduto()) == 0) {
+
 			$data = array(
 				'marca' => $this->input->post('marca'),
 				'tipo' => $this->input->post('tipo'),
 				'sabor' => $this->input->post('sabor'),
 				'litragem' => $this->input->post('litragem'),
 				'valor_unitario' => floatval(str_replace(',', '.', $this->input->post('valor'))),
-				'quantidade' => intval($this->input->post('quantidade'))
+				'quantidade' => intval($this->input->post('quantidade')),
+				'id_usuario_cadastro' => $this->session->id_usuario,
+				'ativo'=> 1,
+				'hora_cadastro' =>'NOW()'
 			);
 
 			$this->db->insert('produtos', $data);
