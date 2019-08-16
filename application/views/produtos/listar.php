@@ -36,9 +36,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}; ?>
 	</tbody>
 </table>
-
+<div class="modal" tabindex="-1" role="dialog" id="modal" data-toggle="modal" data-target="modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="background-color: rgba(0,0,0,.0001) !important; border: none">
+			<div class="modal-body">
+				<div class="d-flex justify-content-center">
+					<div class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script>
+
+    //Modal
+    $('#modal').modal({
+        keyboard: false,
+        backdrop: 'static'
+    });
+    $('#modal').modal('toggle');
 
 	//limpar checkbox
 	for(let i = 0; i < $('.checkbox').length; i++ ){
@@ -102,6 +121,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     function excluiItens(tipo, id) {
 
+        $('#modal').modal('show');
+
         if (tipo == 1) {
 
             let selected = [];
@@ -134,6 +155,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             .done(function (msg) {
                 try{
                     let temp = JSON.parse(msg);
+                    $('#modal').modal('hide');
 					alert(temp['mensagem']);
 				}catch (e) {
 					alert(msg)

@@ -6,12 +6,12 @@ class Produtos extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->model('produtos_model');
+		$this->load->model('ProdutosModel');
 		$this->load->helper('url_helper');
 
-		if(!isset($this->session->logged)){
-			redirect('/login');
-		}
+		//if(!isset($this->session->logged)){
+		//	redirect('/login');
+		//}
 	}
 
 	public function listarProdutos(){
@@ -20,7 +20,7 @@ class Produtos extends CI_Controller{
 		$data['title'] = 'Listagem de Produtos';
 
 		//Captura de produtos cadastrados
-		$data['produtos'] = $this->produtos_model->getProdutos();
+		$data['produtos'] = $this->ProdutosModel->getProdutos();
 
 		//Templates
 		$this->loadHeader($data);
@@ -35,14 +35,14 @@ class Produtos extends CI_Controller{
 
 		$this->setFormRules();
 
-		$data['marcas'] = $this->produtos_model->getMarcas();
+		$data['marcas'] = $this->ProdutosModel->getMarcas();
 
 		$this->loadHeader($data);
 
 		if ($this->form_validation->run() === FALSE){
 			$this->load->view('produtos/cadastrar', $data);
 		} else {
-			if($this->produtos_model->cadastrarProduto()){
+			if($this->ProdutosModel->cadastrarProduto()){
 				$data['mensagem'] = 'Dados inseridos com sucesso';
 				$this->load->view('templates/sucesso', $data);
 				$this->load->view('produtos/cadastrar');
@@ -63,14 +63,14 @@ class Produtos extends CI_Controller{
 		//Regras do Formulário
 		$this->setFormRules();
 
-		$data['marcas'] = $this->produtos_model->getMarcas();
+		$data['marcas'] = $this->ProdutosModel->getMarcas();
 
 		//Header
 		$this->loadHeader($data);
 
 		if ($this->form_validation->run() === FALSE){
 			//Carregar Dados do banco de dados
-			$data['produto'] = $this->produtos_model->getProdutobyId($id);
+			$data['produto'] = $this->ProdutosModel->getProdutobyId($id);
 			$this->load->view('produtos/alterar', $data);
 
 		} else {
@@ -83,7 +83,7 @@ class Produtos extends CI_Controller{
 				$this->load->view('templates/erro', $data);
 			}
 
-			$data['produto'] = $this->produtos_model->getProdutobyId($id);
+			$data['produto'] = $this->ProdutosModel->getProdutobyId($id);
 			$this->load->view('produtos/alterar',$data);
 		}
 
@@ -100,7 +100,7 @@ class Produtos extends CI_Controller{
 		//Regras do Formulário
 		$this->form_validation->set_rules('marca', 'O campo Marca é obrigatório', 'required');
 		$this->form_validation->set_rules('tipo', 'O campo Tipo é obrigatório', 'required');
-		$this->form_validation->set_rules('sabor', 'O campo Sabor é obrigatório', 'required');
+		//$this->form_validation->set_rules('sabor', 'O campo Sabor é obrigatório', 'required');
 		$this->form_validation->set_rules('litragem', 'O campo Litragem é obrigatório', 'required');
 		$this->form_validation->set_rules('valor', 'O campo Valor Unitário é obrigatório', 'required');
 		$this->form_validation->set_rules('quantidade', 'O campo quantidade é obrigatório', 'required');
@@ -115,7 +115,7 @@ class Produtos extends CI_Controller{
 
 		$id = $this->input->post('produto');
 
-		if($this->produtos_model->excluiProdutosDB($id)){
+		if($this->ProdutosModel->excluiProdutosDB($id)){
 			$this->output->set_output(json_encode(array('mensagem'=>'Produto(s) excluído(s) com sucesso.')));
 		}else{
 			$this->output->set_output(json_encode(array('mensagem'=>'Houve um erro ao executar a ação.')));

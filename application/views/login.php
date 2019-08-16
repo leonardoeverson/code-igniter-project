@@ -53,6 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary btn-block">Entrar</button>
+						<button type="button" id="btn" class="btn btn-success btn-block">Cadastre-se</button>
 					</div>
 					<p class="text-center"><a href="#" class="btn"></a></p>
 					</form>
@@ -61,3 +62,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+<script>
+	$('#btn').on('click',()=>{
+        location.href = '/index.php/cadastro-usuario'
+	})
+</script>
