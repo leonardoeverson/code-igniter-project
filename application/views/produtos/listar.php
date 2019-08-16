@@ -95,7 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     });
 
     $('.alterar').on('click', (e) => {
-        location.href = '/index.php/alterar/' + e.target.id
+        location.href = '/index.php/alterar-produto/' + e.target.id
     });
 
 
@@ -126,7 +126,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     function send_action(dados) {
         $.ajax({
             method: "POST",
-            url: "index.php/excluir/",
+            url: "index.php/excluir-produto/",
             dataType: 'html',
             data: {produto: dados}
         })

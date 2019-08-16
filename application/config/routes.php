@@ -50,11 +50,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['cadastrar'] = 'produtos/cadastrarProdutos';
-$route['alterar'] = 'produtos/alterarProdutos';
-$route['alterar/(:any)'] = 'produtos/alterarProdutos/$1';
-$route['excluir'] = 'produtos/excluirProdutos';
-$route['excluir/(:any)'] = 'produtos/excluirProdutos/$1';
+$route['cadastrar-produto'] = 'produtos/cadastrarProdutos';
+$route['alterar-produto'] = 'produtos/alterarProdutos';
+$route['alterar-produto/(:any)'] = 'produtos/alterarProdutos/$1';
+$route['excluir-produto'] = 'produtos/excluirProdutos';
+$route['excluir-produto/(:any)'] = 'produtos/excluirProdutos/$1';
+$route['login'] = 'usuario/LoginUsuario';
 $route['default_controller'] = 'produtos/listarProdutos';
 $route['cadastro/sucesso'] = 'produtos/sucessoMensagem';
 $route['cadastro/erro'] = 'produtos/erroMensagem';

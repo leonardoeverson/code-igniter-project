@@ -15,20 +15,20 @@ class CadastroModel extends CI_Model {
 			'senha' => $this->hashSenha($this->input->post('senha1'))
 		);
 
-		$retorno  = $this->db->insert('usuarios', $data);
+		if($this->db->insert('usuarios', $data)){
+			return true;
+		}else{
+			return false;
+		}
 
-		var_dump($retorno);
-
-		exit();
-		//return true;
 	}
 
 	protected function hashSenha($senha){
 		return password_hash($senha, PASSWORD_DEFAULT);
 	}
 
-	public function verifyEmail($email){
-		$this->db->where('email', $email);
+	public function verificarEmail($email){
+		return $this->db->get_where('usuarios',array('email'=> $email));
 	}
 
 }

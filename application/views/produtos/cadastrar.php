@@ -3,10 +3,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <div class="container" style="margin-top: 30px">
-	<?php echo validation_errors(); ?>
+	<?php $erros = validation_errors(); ?>
 
 	<?php echo form_open('produtos/cadastrarProdutos'); ?>
 	<hr/>
+	<?php
+	if ($erros != null) {
+		?>
+		<div class="form-group row">
+			<div class="alert alert-danger" role="alert" style="width: 100%">
+				<?php echo $erros; ?>
+			</div>
+		</div>
+		<?php
+	}
+	?>
 	<div class="form-group">
 		<label for="marca">Marca</label>
 		<?php

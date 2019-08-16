@@ -12,7 +12,7 @@
 				<a class="nav-link" href="/">Início<span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" href="/index.php/cadastrar">Cadastro de Produtos</a>
+				<a class="nav-link active" href="/index.php/cadastrar-produto">Cadastro de Produtos</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link active" href="/index.php/logout">Sair</a>
