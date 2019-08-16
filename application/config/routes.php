@@ -59,6 +59,8 @@ $route['default_controller'] = 'produtos/listarProdutos';
 $route['cadastro/sucesso'] = 'produtos/sucessoMensagem';
 $route['cadastro/erro'] = 'produtos/erroMensagem';
 
+$route['cadastro-usuario'] = 'cadastro/CadastrarUsuario';
+
 //Code Igniter
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -19,7 +19,8 @@ class Produtos extends CI_Controller{
 		$data['produtos'] = $this->produtos_model->getProdutos();
 
 		//Templates
-		$this->load->view('templates/header', $data);
+		$this->loadHeader($data);
+
 		$this->load->view('produtos/listar', $data);
 		$this->load->view('templates/footer', $data);
 	}
@@ -35,7 +36,7 @@ class Produtos extends CI_Controller{
 		$data['marcas'] = $this->produtos_model->getMarcas();
 
 		//Header
-		$this->load->view('templates/header', $data);
+		$this->loadHeader($data);
 
 		if ($this->form_validation->run() === FALSE){
 			$this->load->view('produtos/cadastrar', $data);
@@ -64,7 +65,7 @@ class Produtos extends CI_Controller{
 		$data['marcas'] = $this->produtos_model->getMarcas();
 
 		//Header
-		$this->load->view('templates/header', $data);
+		$this->loadHeader($data);
 
 		if ($this->form_validation->run() === FALSE){
 			//Carregar Dados do banco de dados
@@ -102,6 +103,11 @@ class Produtos extends CI_Controller{
 		$this->form_validation->set_rules('litragem', 'O campo Litragem é obrigatório', 'required');
 		$this->form_validation->set_rules('valor', 'O campo Valor Unitário é obrigatório', 'required');
 		$this->form_validation->set_rules('quantidade', 'O campo quantidade é obrigatório', 'required');
+	}
+
+	protected function loadHeader($data){
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav');
 	}
 
 	public function excluirProdutos(){

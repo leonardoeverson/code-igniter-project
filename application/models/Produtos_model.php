@@ -4,35 +4,31 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class produtos_model extends CI_Model{
 
 	public function __construct(){
+		$this->load->helper('url');
 		$this->load->database();
 	}
 
 	public function getProdutos(){
 		$query = $this->db->get('produtos');
-
 		return $query->result();
 	}
 
-	public function getProduto()
-	{
+	public function getProduto(){
 
 		$tipo = $this->input->post('tipo');
 		$marca = $this->input->post('marca');
 		$sabor = $this->input->post('sabor');
 		$litragem = $this->input->post('litragem');
 		$query = $this->db->query("SELECT * from produtos where marca = '$marca' and tipo = '$tipo' and sabor = '$sabor' and litragem = '$litragem'");
-
 		return $query->result();
 	}
 
 	public function getProdutobyId($id){
 		$query = $this->db->query("SELECT * FROM produtos where id = $id");
-
 		return $query->result();
 	}
 
 	public function getProdutobyData($query){
-
 		$result = $this->db->query($query);
 		return $result;
 	}
@@ -88,8 +84,6 @@ class produtos_model extends CI_Model{
 	}
 
 	public function cadastrarProduto(){
-
-		$this->load->helper('url');
 
 		if (count($this->getProduto()) == 0) {
 			$data = array(
