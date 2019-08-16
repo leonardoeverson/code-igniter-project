@@ -75,8 +75,8 @@ class Produtos extends CI_Controller{
 
 		} else {
 
-			if($this->produtos_model->alterarProduto()){
-				$data['mensagem'] = 'Dados atualizados com sucesso';
+			if($this->ProdutosModel->alterarProduto()){
+				$data['mensagem'] = 'Dados atualizados com sucesso !';
 				$this->load->view('templates/sucesso', $data);
 			}else{
 				$data['mensagem'] = 'O produto já existe no banco de dados';

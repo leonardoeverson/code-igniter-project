@@ -12,10 +12,10 @@ class ProdutosTestcase extends TestCase{
 		$output = $this->request(
 			'POST',
 			'/produtos/cadastrarProdutos',
-			['marca' => 'Coca-cola', 'sabor'=>'','litragem'=>'600 mL','tipo'=>'Garrafa','valor'=>'1,50','quantidade'=>'10']
+			['marca' => 'Coca-cola', 'sabor'=>'','litragem'=>'250 mL','tipo'=>'Garrafa','valor'=>'1,50','quantidade'=>'10']
 		);
 
-		$this->assertContains('Dados cadastrados com sucesso', $output);
+		$this->assertContains('Dados inseridos com sucesso', $output);
 	}
 
 	public function testGetProduto(){
@@ -26,15 +26,23 @@ class ProdutosTestcase extends TestCase{
 
 		$output = $this->request(
 			'POST',
-			'produtos/alterarProdutos/29',
-			['marca' => 'Coca-cola', 'sabor'=>'','litragem'=>'1L','tipo'=>'Garrafa','valor'=>'1,50','quantidade'=>'10']
+			'/produtos/alterarProdutos/33',
+			['id'=>'33','marca' => 'Coca-cola', 'sabor'=>'','litragem'=>'600 mL','tipo'=>'Garrafa','valor'=>'1,50','quantidade'=>'10']
 		);
 
-		$this->assertContains('Dados atualizados com sucesso', $output);
+		$this->assertContains('Dados atualizados com sucesso !', $output);
 
 	}
 
 	public function testexcluirProduto(){
+
+		$output = $this->request(
+			'POST',
+			'/excluir-produto/33',
+			['produto'=>'29']
+		);
+
+		$this->assertContains('{"mensagem":"Produto(s) exclu\u00eddo(s) com sucesso."}', $output);
 
 	}
 }

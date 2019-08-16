@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" tests="4" assertions="2" failures="0" errors="0" time="3.181948">
-    <testcase name="test_index" class="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" line="6" assertions="1" time="1.500208"/>
-    <testcase name="testCadastroProduto" class="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" line="11" assertions="1" time="1.662576"/>
-    <testcase name="testGetProduto" class="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" line="21" assertions="0" time="0.009500"/>
-    <testcase name="testexcluirProduto" class="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" line="25" assertions="0" time="0.009664"/>
+  <testsuite name="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" tests="5" assertions="4" failures="0" errors="0" time="6.175433">
+    <testcase name="test_index" class="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" line="6" assertions="1" time="1.464550"/>
+    <testcase name="testCadastroProduto" class="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" line="11" assertions="1" time="1.653495"/>
+    <testcase name="testGetProduto" class="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" line="21" assertions="0" time="0.012079"/>
+    <testcase name="testAlteraProduto" class="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" line="25" assertions="1" time="1.853216"/>
+    <testcase name="testexcluirProduto" class="ProdutosTestcase" file="C:\xampp\htdocs\code-igniter-project\application\tests\controllers\ProdutosTestcase.php" line="37" assertions="1" time="1.192093"/>
   </testsuite>
 </testsuites>
