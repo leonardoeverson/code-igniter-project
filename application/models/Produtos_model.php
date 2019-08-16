@@ -13,7 +13,8 @@ class produtos_model extends CI_Model{
 
 	public function getProdutos(){
 
-		$query = $this->db->get_where('produtos',array('ativo'=> 1));
+		//$query = $this->db->get_where('produtos',array('ativo'=> 1));
+		$query = $this->db->get('produtos');
 		return $query->result();
 
 	}
@@ -69,6 +70,7 @@ class produtos_model extends CI_Model{
 
 		$pos = strpos($id, ',');
 		if ($pos === false) {
+
 			$result = $this->db->delete('produtos', array('id' => $id));
 
 			if ($result == 1) {
@@ -101,7 +103,6 @@ class produtos_model extends CI_Model{
 				'valor_unitario' => floatval(str_replace(',', '.', $this->input->post('valor'))),
 				'quantidade' => intval($this->input->post('quantidade')),
 				'id_usuario_cadastro' => $this->session->id_usuario,
-				'ativo'=> 1,
 				'hora_cadastro' =>'NOW()'
 			);
 

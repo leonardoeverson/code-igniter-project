@@ -76,7 +76,7 @@ class Produtos extends CI_Controller{
 		} else {
 
 			if($this->produtos_model->alterarProduto()){
-				$data['mensagem'] = 'Dados inseridos com sucesso';
+				$data['mensagem'] = 'Dados atualizados com sucesso';
 				$this->load->view('templates/sucesso', $data);
 			}else{
 				$data['mensagem'] = 'O produto já existe no banco de dados';
@@ -116,9 +116,9 @@ class Produtos extends CI_Controller{
 		$id = $this->input->post('produto');
 
 		if($this->produtos_model->excluiProdutosDB($id)){
-			$this->output->set_output(json_encode(array('mensagem', 'Produto(s) excluído(s) com sucesso.')));
+			$this->output->set_output(json_encode(array('mensagem'=>'Produto(s) excluído(s) com sucesso.')));
 		}else{
-			$this->output->set_output(json_encode(array('mensagem', 'Houve um erro ao executar a ação.')));
+			$this->output->set_output(json_encode(array('mensagem'=>'Houve um erro ao executar a ação.')));
 		}
 
 	}

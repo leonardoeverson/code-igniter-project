@@ -47,6 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     let tabela = $('#table').DataTable({
 		dom:'Bfrtip',
+        "pageLength": 10,
         "language": {
             "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -131,7 +132,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             data: {produto: dados}
         })
             .done(function (msg) {
-                alert(msg);
+                try{
+                    let temp = JSON.parse(msg);
+					alert(temp['mensagem']);
+				}catch (e) {
+					alert(msg)
+                }
+
                 location.reload();
             });
     }
