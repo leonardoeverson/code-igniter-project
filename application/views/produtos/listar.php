@@ -106,7 +106,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             action: function (e, dt, node, config) {
                 excluiItens(1);
             }
-        }
+        },
+            {
+                text: 'Cadastrar novo produto',
+                className: 'btn btn-success',
+                attr: {
+                    id: 'cadastro-produto'
+                },
+                action: function (e, dt, node, config) {
+                    location.href = "/index.php/cadastrar-produto"
+                }
+            }
         ]
     });
 
@@ -173,6 +183,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <style>
 	#excluir_itens{
+		margin-bottom: -40px;
+	}
+
+	#cadastro-produto{
+		margin-left: 10px;
 		margin-bottom: -40px;
 	}
 </style>
