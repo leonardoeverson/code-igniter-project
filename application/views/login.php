@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+								<span class="input-group-text">E-mail: </span>
 							</div>
 							<input name="email" class="form-control" placeholder="Insira um email válido"
 								   type="email">
@@ -46,9 +46,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+								<span class="input-group-text">Senha: </span>
 							</div>
-							<input class="form-control" placeholder="******" type="password" name="senha">
+							<input class="form-control" placeholder="Insira a senha" type="password" name="senha">
 						</div>
 					</div>
 					<div class="form-group">
