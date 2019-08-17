@@ -117,8 +117,4 @@ class ProdutosModel extends CI_Model{
 
 		return $query->result();
 	}
-
-	public function cadastroMarcas(){
-
-	}
 }
