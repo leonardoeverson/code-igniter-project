@@ -9,9 +9,9 @@ class Produtos extends CI_Controller{
 		$this->load->model('ProdutosModel');
 		$this->load->helper('url_helper');
 
-		//if(!isset($this->session->logged)){
-		//	redirect('/login');
-		//}
+		if(!isset($this->session->logged)){
+			redirect('/login');
+		}
 	}
 
 	public function listarProdutos(){
