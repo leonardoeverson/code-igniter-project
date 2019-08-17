@@ -18,10 +18,6 @@ class ProdutosTestcase extends TestCase{
 		$this->assertContains('Dados inseridos com sucesso', $output);
 	}
 
-	public function testGetProduto(){
-
-	}
-
 	public function testAlteraProduto(){
 
 		$output = $this->request(
