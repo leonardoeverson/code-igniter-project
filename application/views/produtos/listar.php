@@ -120,35 +120,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
     function excluiItens(tipo, id) {
+		let confirm__ = confirm("Você realmente deseja excluir o(s) produto(s) ?");
 
-        $('#modal').modal('show');
+		if(confirm__){
 
-        if (tipo == 1) {
+            $('#modal').modal('show');
 
-            let selected = [];
+            if (tipo == 1) {
 
-            for (let i = 0; i < $('.checkbox').length; i++) {
-                if ($('.checkbox')[i].checked) {
-                    selected.push($('.checkbox')[i].id);
+                let selected = [];
+
+                for (let i = 0; i < $('.checkbox').length; i++) {
+                    if ($('.checkbox')[i].checked) {
+                        selected.push($('.checkbox')[i].id);
+                    }
                 }
+
+                if(selected.length > 0){
+                    send_action(selected.join(','));
+                }else{
+                    alert('Você deve selecionar pelo menos um item.')
+                }
+
+
+            } else {
+                send_action(id);
             }
-
-            if(selected.length > 0){
-                send_action(selected.join(','));
-			}else{
-                alert('Você deve selecionar pelo menos um item.')
-			}
-
-
-        } else {
-            send_action(id);
-        }
+		}
     }
 
     function send_action(dados) {
         $.ajax({
             method: "POST",
-            url: "index.php/excluir-produto/",
+            url: "/index.php/excluir-produto/",
             dataType: 'html',
             data: {produto: dados}
         })
