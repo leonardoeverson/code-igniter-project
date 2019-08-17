@@ -9,6 +9,7 @@ As seguintes tecnologias foram utilizadas:
 - Datatable (Biblioteca que fornece um conjunto de ferramentas para trabalhar com tabelas);
 - Jquery;
 - PHPUnit 8;
+- PHP 7.3.8;
 - Mysql.
 
 *******************
@@ -20,7 +21,9 @@ Antes de executar o sistema, deve-se executar o script de banco de dados em um s
 Requisitos do servidor
 *******************
 
-PHP 5.6 ou maior
+ - PHP 5.6 ou maior
+ - Banco de dados Mysql ou MariaDB
+ - Servidor Web Apache ou Nginx
 
 *******************
 Acesso
