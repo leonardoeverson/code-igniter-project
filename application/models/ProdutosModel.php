@@ -13,10 +13,8 @@ class ProdutosModel extends CI_Model{
 
 	public function getProdutos(){
 
-		//$query = $this->db->get_where('produtos',array('ativo'=> 1));
 		$query = $this->db->get('produtos');
 		return $query->result();
-
 	}
 
 	public function getProduto(){
