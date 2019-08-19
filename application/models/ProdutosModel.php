@@ -21,11 +21,9 @@ class ProdutosModel extends CI_Model{
 
 	public function getProduto(){
 
-		$tipo = $this->input->post('tipo');
-		$marca = $this->input->post('marca');
-		$sabor = $this->input->post('sabor');
 		$litragem = $this->input->post('litragem');
-		$query = $this->db->query("SELECT * from produtos where marca = '$marca' and tipo = '$tipo' and sabor = '$sabor' and litragem = '$litragem'");
+		$marca = $this->input->post('marca');
+		$query = $this->db->query("SELECT * from produtos where marca = '$marca' and litragem = '$litragem'");
 		return $query->result();
 
 	}
